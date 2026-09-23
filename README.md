@@ -21,26 +21,21 @@
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
+Corpus I picked is city_guides
+My system can answer good questions about travel, local logistics, food, walking routes, and practical visitor advice for the fictional region about those nine towns. They can answer like What are the transportation options,  parking available, travel times etc. It can also answer food/dining and can answer cheaper/better value food options. 
 
-     Milestone 5. -->
 
 ## Chunking Strategy
 
 **Chunk size:**
 **Overlap:**
 
-<!-- What about YOUR documents made you pick these numbers? Short posts and
-     long sectioned guides don't want the same chunking, and "800 seemed
-     reasonable" earns nothing. Point at something you noticed when you read
-     the documents in Milestone 1.
+Corpus: city_guides
+  loaded   14 documents, 28,958 characters, ~2,068 characters per document
+  chunked  51 chunks, 650 characters on average (shortest 24, longest 800), produced by chunker.py::fallback_split
+  embedding 51 chunks (first run downloads the model)...
+  stored   51 chunks in 4.6s
 
-     If you changed your mind partway through, say so and say why. That's worth
-     more than pretending you got it right first time.
-
-     Milestone 3. -->
 
 ## Sample Chunks
 
