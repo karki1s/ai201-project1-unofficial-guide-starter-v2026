@@ -25,6 +25,7 @@ contains the answer.
 **Why this target:**
 <!-- e.g. "One of my questions is about a topic only two documents mention, so
      I expect that one to be hard." -->
+Because the city guides are organized by headings the relevant facts are usually concentrated in one section. I am aiming for 4 of 5 because a single hard question or a weak retrieval match may still happen, but the system should regularly bring back the relevant chunk.
 
 ---
 
@@ -35,6 +36,8 @@ Every answer the system produces names at least one source document.
 **Why this target:**
 <!-- Why all five and not four? What about your setup makes that achievable —
      or what would have to go wrong for it not to be? -->
+
+The guides are factual and local, so the system should always point back to a real document instead of speaking generally. A missing source would mean the answer is not grounded in the corpus.
 
 ---
 
@@ -52,10 +55,12 @@ in at least 4 of 5 tries.
 **Why this target:**
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
      Was there a clean gap, or did the two groups overlap? -->
+My corpus covers transport, food, walking, and local travel advice about 9 city. Questions outside that world should be rejected rather than answered from vague similarity. I want the gate to work in at least 4 of 5 cases because a few near-misses are unavoidable, but unrelated questions should not slip through.
 
 ---
 
 ## 4. Something about your chunks
+No chunk is under 40 characters or over 700 to consider it to be valid. 
 
 <!-- YOU WRITE THIS ONE.
 
@@ -69,15 +74,14 @@ in at least 4 of 5 tries.
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
 
-
-
 **Why this target:**
-
+We would like to keep our chunk in between our lower and upper bound. If our chunk size is under our lower limit we might miss the relevent context that means we will not able to use surrounding context and model might be forced to make up things. Similary, if our chunck is over 700 we might get poor retrival accuracy and there is chance that our model might ignore the middle section of the information. 
 
 
 ---
 
 ## 5. Your choice
+For at least 4 of my 5 test questions, the answer includes the correct town or route name from the guide.
 
 <!-- YOU WRITE THIS ONE TOO.
 
@@ -88,9 +92,8 @@ in at least 4 of 5 tries.
      outcome. -->
 
 
-
 **Why this target:**
-
+The city guide corpus is full of place specific information, so a useful answer should mention the right town, route, or local area rather than giving a vague tourist suggestion. I am aiming for 4 of 5 because some questions may be harder to answer precisely, but a system that can name the correct place most of the time is still grounded and useful.
 
 
 ---
