@@ -192,6 +192,7 @@ The easiest town in the region is Thornby Wells because it is flat, compact, and
      Milestone 5. -->
 
 **1.**
+I ask Claude to give me the summary of what each program does in this repo to understand.
 
 **2.**
 
