@@ -1,6 +1,6 @@
 # The Unofficial Guide
 
-<!-- Replace this line with your name and which corpus you picked. -->
+
 
 > **This file is your submission.** Fill it in as you go — most sections get
 > written during the milestone that produces them, not at the end.
@@ -15,14 +15,17 @@
 > are notes to you and don't show up when the page renders — you can leave them
 > or remove them.
 
----
+Suman Karki city_guides
 
 # Unit 1
 
 ## What This Does
+<!-- Three or four sentences. Which corpus you picked, and the kinds of
+     questions your system answers. Write it for someone who has never seen
+     this repo.
 
-Corpus I picked is city_guides
-My system can answer good questions about travel, local logistics, food, walking routes, and practical visitor advice for the fictional region about those nine towns. They can answer like What are the transportation options,  parking available, travel times etc. It can also answer food/dining and can answer cheaper/better value food options. 
+     Milestone 5. -->
+I selected city_guide, my system can answer questions about travel, local logistics, food, walking routes, and practical visitor advice for the fictional region about those nine towns. They can answer like What are the transportation options,  parking available or not, travel times etc. It can also answer food/dining and can answer cheaper/better value food options. 
 
 
 ## Chunking Strategy
@@ -30,11 +33,21 @@ My system can answer good questions about travel, local logistics, food, walking
 **Chunk size:**
 **Overlap:**
 
-Corpus: city_guides
-  loaded   14 documents, 28,958 characters, ~2,068 characters per document
-  chunked  51 chunks, 650 characters on average (shortest 24, longest 800), produced by chunker.py::fallback_split
-  embedding 51 chunks (first run downloads the model)...
-  stored   51 chunks in 4.6s
+Chunk size 700
+Overlap: 0
+
+<!-- What about YOUR documents made you pick these numbers? Short posts and
+     long sectioned guides don't want the same chunking, and "800 seemed
+     reasonable" earns nothing. Point at something you noticed when you read
+     the documents in Milestone 1.
+**Chunk size:** Up to three complete body sentences, with the document title repeated for context.
+
+     If you changed your mind partway through, say so and say why. That's worth
+     more than pretending you got it right first time.
+**Overlap:** Zero repeated body sentences; the title is retained in each chunk.
+
+     Milestone 3. -->
+My documents are organized well with topics and paragraphs.Essentially, answers can be found with in the paragraph so I decided to chunk using paragraph and upper limit of the chunks size about 700. Overlap I keept 0, I decided not to reuse text from the previous chunk. 
 
 
 ## Sample Chunks
@@ -48,29 +61,86 @@ Corpus: city_guides
 
      Milestone 3. -->
 
-**Chunk 1** — source: `` — produced by: ``
+**Chunk 1** — source: `guide_accessibility.md#0` — produced by: `chunker.py::split_documents`
 
 ```
+# Getting around the region with limited mobility
+
+An honest assessment rather than a promotional one. Some of these places are
+difficult and it is better to know in advance.
+
+## Straightforward
+
+**Thornby Wells** is the easiest town in the region. It is flat, compact, and
+everything is within three minutes of everything else. Parking is free for two
+hours anywhere in town and the station is central. The pump room and gardens
+are level throughout.
+
+**Marchwood** has a modern tram network with level boarding on all four lines,
+running every 8 minutes on weekdays. The city museum and covered market are both
+step-free. The distances between districts are the main consideration.
 ```
 
-**Chunk 2** — source: `` — produced by: ``
+**Chunk 2** — source: `guide_corry_vale.md#2` — produced by: `chunker.py::split_documents`
 
 ```
+The valley itself is the attraction. The footpath network is dense and well marked, and a circuit taking in three of the four villages is about nine miles with 500 metres of ascent. The chapel in the second village is 12th century and always unlocked.
+
+## Where to stay
+
+Perhaps thirty beds in the entire valley, spread across two pubs and a handful of farmhouse rooms. In summer these are booked months ahead. Camping is permitted on two marked fields and nowhere else.
+
+## When to go
 ```
 
-**Chunk 3** — source: `` — produced by: ``
+**Chunk 3** — source: `guide_givens_mill.md#0` — produced by: `chunker.py::split_documents`
 
 ```
+# Givens Mill
+
+Givens Mill is a village of 700 built around a working watermill that still grinds flour commercially. It is the sort of place people visit for an afternoon and then talk about for longer than the visit lasted.
+
+## Getting there
+
+No station and no bus on Sundays; four buses a day from Brightwater on weekdays, taking 30 minutes. Driving is 20 minutes. The village car park holds about forty cars and is full by 11am on summer Saturdays.
+
+## Getting around
+
+Everything is on one street along the river. The mill is at one end and the church at the other, eight minutes apart. The riverside path continues in both directions for as far as you want to walk.
+
+## Eat and drink
 ```
 
-**Chunk 4** — source: `` — produced by: ``
+**Chunk 4** — source: `guide_kestrelford.md#3` — produced by: `chunker.py::split_documents`
 
 ```
+Late spring and early autumn. The Saturday market runs year-round but is much reduced from November to February. August is busy with walkers. The single-track approach road is genuinely difficult in snow and the town can be cut off for a day or two most winters.
+
+## Practical notes
+
+Cash is still useful at the market and in smaller places, though cards are
+accepted almost everywhere now. Mobile coverage is good in the centre and
+patchy on the outskirts. The nearest full hospital is in Brightwater; there is
+a minor injuries unit locally with limited hours.
+
 ```
 
-**Chunk 5** — source: `` — produced by: ``
+**Chunk 5** — source: `guide_regional_transport.md#1` — produced by: `chunker.py::split_documents`
 
 ```
+Three operators run in the region and they do not accept each other's tickets,
+which is the single most common source of confusion for visitors. Services
+concentrate on weekday daytimes. Sunday service is minimal to non-existent
+outside the Brightwater town routes.
+
+The Kestrelford service is hourly on weekdays, two-hourly on Saturdays, and
+does not run on Sundays. The Halden Bay coast service runs four times daily
+year-round.
+
+## Driving
+
+For each one, ask: could someone answer a question using only this,
+without reading what came before or after?
 ```
 
 ## Sample Answer

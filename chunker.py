@@ -26,6 +26,7 @@ from dataclasses import dataclass
 
 import config
 from ingest import Document
+import re
 
 
 @dataclass
@@ -97,7 +98,36 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
       - Would splitting on paragraph breaks keep more thoughts intact than
         splitting on a character count?
     """
-    return fallback_split(documents)
+    chunks: list[Chunk] = []
+    for doc in documents:
+        paras = [p.strip() for p in re.split(r"\n\s*\n+", doc.text) if p.strip()]
+        current = ""
+        index = 0
+        for p in paras:
+            if len(current) + len(p) < 700:
+                current = f"{current}\n\n{p}".strip() if current else p
+            else:
+                chunks.append(
+                    Chunk(
+                        text=current,
+                        source=doc.source,
+                        index=index,
+                        produced_by="chunker.py::split_documents",
+                    )
+                )
+                index+=1
+                current=p
+        if current:
+            chunks.append(
+                Chunk(
+                    text=current,
+                    source=doc.source,
+                    index=index,
+                    produced_by="chunker.py::split_documents",
+                )
+            )
+
+    return chunks
 
 
 def describe(chunks: list[Chunk]) -> str:
