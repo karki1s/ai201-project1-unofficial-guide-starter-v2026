@@ -149,10 +149,11 @@ without reading what came before or after?
      visible. Milestone 4. -->
 
 **Question:**
-
+If I want to suggest the easy town for my grandmother what is the best town I am looking for flat easy to walk?
 **Answer:**
 
 ```
+The easiest town in the region is Thornby Wells because it is flat, compact, and everything is within three minutes of everything else, with level pump rooms and gardens (guide_accessibility.md).
 ```
 
 **My relevance cutoff:**
@@ -168,7 +169,16 @@ without reading what came before or after?
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+|What is the best way to get from Brightwater to the regional hub?|Yes| 0.372|
+|If I wanted to have a meal on Sunday evening what is the place you suggest|Yes|0.487|
+|If I am going to Marchwood and do some shoping what is the best payment options|Yes|0.531|
+|I would like to go to Brightwater for Tuesday market what time the Tuesday market starts?|Yes|0.257|
+|Where does one has to go to find nearest full hospital if you are in Givens Mill?|Yes|0.389|
+|What is the capital of Mongolia?|No|0.845|
+|How do I change the oil in a diesel engine?|No|0.911|
+|Who won the 1994 World Cup?|No|1.008|
+|What is the recommended dosage of ibuprofen for a headache?|No|0.85|
+|How do I write a for loop in Rust?|No|0.819|
 
 ## How I Used AI
 
