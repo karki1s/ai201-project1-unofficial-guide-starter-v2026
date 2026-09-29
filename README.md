@@ -358,14 +358,43 @@ Based on the documents, Sunday evening is hardest to find anywhere except in Mar
 
      Milestone 3. -->
 
+Both misses are the same problem at the same stage: chunking. My chunker
+drops the document title, so the town a chunk belongs to is usually not inside
+the chunk. Every fact in my corpus is town-scoped, and my chunks are not.
+
+Two of my five questions need a fact that only makes sense when paired with a
+town name, and in both cases the pairing was destroyed at chunking time. They
+are one problem, not two.
+
+One other problem I notice is for the crietrion 1 it missed  
+My question about the Tuesday market has expects: "7" in questions.py. But every run answer said "7am".
+
+### A measurement problem I found while diagnosing this
+
+Criterion 1's one miss is not a pipeline failure. My question about the Tuesday
+market has `expects: "7"` in `questions.py`. The corpus says "sets up in the
+square from 7am" and all three of my answers said "7am". My scorer.py::contains_phrase matches whole words rather than substrings so "7" never matches "7am" and the question scored fail in all three runs despite being
+answered correctly every time.
+
+
 ## The Improvement
 
 **What I changed:**
+
+I changed chunker.py::split_documents to prepend the document's title line to
+every chunk it produces, instead of only to the first one. 
+
+I also had to reduce the accumulation budget from 700 characters to
+700 - len(title prefix), because my longest chunk was already 696 characters
+and adding a title would have pushed it past the upper bound I set in criterion 4. 
 
 **Why I picked it:**
 
 <!-- Connect it to a specific diagnosis above in one sentence. If you can't,
      you picked a fix because it sounded impressive. -->
+Both of my misses trace to the same mechanism; a town scoped fact sitting in a
+chunk that does not name its town and putting the title in every chunk is the
+smallest change that puts the missing half back where the embedding can see it.
 
 ### Run Log — After
 
