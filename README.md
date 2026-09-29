@@ -408,7 +408,7 @@ smallest change that puts the missing half back where the embedding can see it.
 | 2. Every answer names a source | 5 of 5 | 5/5 | 5/5  | 5/5  | MET  |
 | 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5  | MET |
 | 4. | No chunk under 40 or over 700 characters | all chuncks| 55/55 | 55/55 | 55/55 | MET | 
-| 5. The answer includes the correct town or route name | 4 of 5 | 4/5 | 4/5  | MET |
+| 5. The answer includes the correct town or route name | 4 of 5 | 4/5 | 4/5  | 4/5 | MET |
 
 **Did it help?**
 
