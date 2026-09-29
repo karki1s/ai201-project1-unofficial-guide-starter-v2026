@@ -226,7 +226,7 @@ I ask Claude to give me the summary of what each program does in this repo to un
 | 1. Retrieved chunk contains the answer | 4 of 5 | 4/5 | 4/5 | 4/5  | MET |
 | 2. Every answer names a source | 5 of 5 | 4/5  | 4/5 | 4/5 | MISSED |
 | 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
-| 4.No chunk under 40 or over 700 characters| 5 of 5| 5/5 | 5/5 | 5/5 | MET |
+| 4.No chunk under 40 or over 700 characters| 53 of 53| 53/53 | 53/53 | 53/53 | MET |
 | 5. the answer includes the correct town or route name| 4 of 5 | 3/5| 3/5 | 3/5 | MISSED |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
@@ -331,11 +331,12 @@ Based on the documents, Sunday evening is hardest to find anywhere except in Mar
 
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunk contains the answer | MET | Target 4 of 5. All three runs came out 4/5, so the target held every time rather than once. The same question missed in all three runs (Tuesday market time), so the 4 is stable. |
+| 2 | Every answer names a source | MISSED | Target was 5 of 5. Four named a document; the Marchwood payment question returned "I do not have enough information" and cited nothing. So 4/5 is a miss by definition, not a near-miss. I counted it as a miss even though refusing was the right behaviour, because this criterion is about naming a source, not about being right. |
+| 3 | Gate stops out-of-corpus questions | MET | Target 4 of 5; the gate refused 5 of 5. Measured in one pass rather than three because retrieval is deterministic and the gate is a comparison against a fixed number (0.65), so there is nothing that could vary between runs. The closest out-of-scope distance was 0.819, well clear of the cutoff. |
+| 4 | No chunk under 40 or over 700 characters | MET | Shortest chunk 131 characters, longest 696, measured across all 53 chunks, all where between lower and upper chunk limit |
+| 5 | Answer includes the correct town or route name | MISSED | arget 4 of 5; got 3/5 in all three runs. My scoring rule: a town name only counts if the answer drew it from the guides, not if it echoed a place I named in my own question. That is what failed the Marchwood payment answer — "Marchwood" appears in it, but only because I put it there. |
+
 
 ## Diagnoses
 
