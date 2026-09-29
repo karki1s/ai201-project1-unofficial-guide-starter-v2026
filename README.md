@@ -223,15 +223,100 @@ I ask Claude to give me the summary of what each program does in this repo to un
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 4/5 | 4/5 | 4/5  | MET |
+| 2. Every answer names a source | 5 of 5 | 4/5  | 4/5 | 4/5 | MISSED |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4.No chunk under 40 or over 700 characters| 5 of 5| 5/5 | 5/5 | 5/5 | MET |
+| 5. the answer includes the correct town or route name| 4 of 5 | 3/5| 3/5 | 3/5 | MISSED |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
      Name the file and function that produced it. -->
+
+### Criterion 1 — Retrieved chunk contains the answer (4/5)
+
+- Produced by: `run_eval.py::main`
+- Retrieval: `store.py::search`, chunks from `chunker.py::split_documents`
+
+### Where does one has to go to find nearest full hospital if you are in Givens Mill? — run 1
+
+- Best distance: 0.3891 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_corry_vale.md, guide_givens_mill.md, guide_marchwood.md
+
+```
+According to the documents, the nearest full hospital is in Brightwater (guide_givens_mill.md).
+```
+
+### I would like to go to Brightwater for Tuesday market what time the Tuesday market starts? — run 1
+
+- Best distance: 0.2574 (passed the gate)
+- Sources retrieved: guide_brightwater.md, guide_eating.md, guide_kestrelford.md, guide_regional_transport.md, guide_seasons.md
+
+```
+The Brightwater Tuesday market sets up at 7am. 
+
+Sources: `guide_eating.md` and `guide_brightwater.md`
+```
+
+### Criterion 2 — Every answer names a source (4/5, MISSED)
+
+Produced by: `generate.py::answer_from_chunks`
+
+### What is the best way to get from Brightwater to the regional hub? — run 2
+
+- Best distance: 0.3716 (passed the gate)
+- Sources retrieved: guide_brightwater.md, guide_kestrelford.md, guide_regional_transport.md, guide_walking.md
+
+```
+Based on the provided documents, the train is the best way to get from Brightwater to the regional hub, taking 50 minutes with eleven services a day on weekdays and six on Sundays (*guide_regional_transport.md* and *guide_brightwater.md*).
+```
+### If I am going to Marchwood and do some shoping what is the best payment options — run 1
+
+- Best distance: 0.5306 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_eating.md, guide_kestrelford.md, guide_marchwood.md, guide_thornby_wells.md
+
+```
+I do not have enough information to answer this question about shopping payment options in Marchwood, as the provided documents do not mention payment methods for Marchwood.
+```
+
+## The relevance gate on out-of-corpus questions
+
+Produced by `run_eval.py::check_out_of_scope`, cutoff 0.65. Refused 5 of 5.
+
+Retrieval is deterministic and the gate is a comparison against a
+fixed number, so these do not vary between runs — one pass over the
+list is the whole measurement.
+
+| Out-of-scope question | Best distance | Gate |
+|---|---|---|
+| What is the capital of Mongolia? | 0.845 | refused |
+| How do I change the oil in a diesel engine? | 0.911 | refused |
+| Who won the 1994 World Cup? | 1.008 | refused |
+| What is the recommended dosage of ibuprofen for a headache? | 0.858 | refused |
+| How do I write a for loop in Rust? | 0.819 | refused |
+
+
+### Criterion 4 — No chunk under 40 or over 700 characters (5/5, MET)
+
+Produced by: `chunker.py::describe`, over the chunks from `chunker.py::split_documents`
+(run with `python chunker.py`)
+
+```
+53 chunks, 544 characters on average (shortest 131, longest 696), produced by chunker.py::split_documents
+```
+
+### Criterion 5 — The answer includes the correct town or route name (3/5, MISSED)
+
+Produced by: `generate.py::answer_from_chunks`
+
+### If I wanted to have a meal on Sunday evening what is the place you suggest — run 1
+
+- Best distance: 0.4874 (passed the gate)
+- Sources retrieved: guide_brightwater.md, guide_eating.md, guide_elder_ness.md, guide_pellew_sands.md
+
+```
+Based on the documents, Sunday evening is hardest to find anywhere except in Marchwood and Thornby Wells (`guide_eating.md`).
+```
 
 ## Verdicts
 
