@@ -195,6 +195,7 @@ The easiest town in the region is Thornby Wells because it is flat, compact, and
 I ask Claude to give me the summary of what each program does in this repo to understand.
 
 **2.**
+I have asked Claude to help me understand the requirements, validate my changes to the chunker.py
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
@@ -432,9 +433,17 @@ Before the changes there were 53 chunks but not there has been 55 chunks (detail
 
      Milestone 5. -->
 
+Eventhough all five criteria came out MET after the fix. But still I can see clearly, there are cases that actual outcome from LLM was not exact and can be improved further more. For example quest 1 still cannot name the regional hub. 
+
+I also saw for the question like "I would like to go to Brightwater for Tuesday market what time the Tuesday market starts?" my expected value was "7" which can't match "7am".
+
 ## What I'd Do Differently
 
 <!-- Knowing what you know now — which of your five criteria would you write
      differently, and why?
 
      Milestone 5. -->
+
+The thing I would do differently will be try to increase the TOP_K and see if it will pickup correct answer for Question 1 name the regional hub. 
+
+I also saw for the question like "I would like to go to Brightwater for Tuesday market what time the Tuesday market starts?" my expected value was "7" which can't match "7am". This one is tricky I would have expected value as "7am" since its valid answer then 7 it self.  
