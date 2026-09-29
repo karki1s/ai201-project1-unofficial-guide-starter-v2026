@@ -403,11 +403,11 @@ smallest change that puts the missing half back where the embedding can see it.
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 4/5 | 4/5 | 4/5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5/5 | 5/5  | 5/5  | MET  |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5  | MET |
+| 4. | No chunk under 40 or over 700 characters | all chuncks| 55/55 | 55/55 | 55/55 | MET | 
+| 5. The answer includes the correct town or route name | 4 of 5 | 4/5 | 4/5  | MET |
 
 **Did it help?**
 
@@ -417,6 +417,10 @@ smallest change that puts the missing half back where the embedding can see it.
      tell.
 
      Milestone 4. -->
+
+For criterion 2 the question that was failing now answers correctly. Before, this question refused and cited nothing. After, all three runs answer
+from the right document. 
+Before the changes there were 53 chunks but not there has been 55 chunks (details: 55 chunks, 541 characters on average (shortest 159, longest 695), produced by chunker.py::split_documents). Approparetly added the title from the document if presented otherwise the document source. 
 
 ## What's Still Broken
 

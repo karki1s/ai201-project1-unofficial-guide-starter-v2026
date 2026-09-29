@@ -100,16 +100,20 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
     """
     chunks: list[Chunk] = []
     for doc in documents:
+        first = doc.text.splitlines()[0].strip()
+        title = first if first.startswith("#") else f"# {doc.source}"
+        prefix = f"{title}\n\n"
+        budget = 700 - len(prefix)
         paras = [p.strip() for p in re.split(r"\n\s*\n+", doc.text) if p.strip()]
         current = ""
         index = 0
         for p in paras:
-            if len(current) + len(p) < 700:
+            if len(current) + len(p) < budget:
                 current = f"{current}\n\n{p}".strip() if current else p
             else:
                 chunks.append(
                     Chunk(
-                        text=current,
+                        text=current if current.startswith(title) else prefix + current,
                         source=doc.source,
                         index=index,
                         produced_by="chunker.py::split_documents",
@@ -120,7 +124,7 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
         if current:
             chunks.append(
                 Chunk(
-                    text=current,
+                    text=current if current.startswith(title) else prefix + current,
                     source=doc.source,
                     index=index,
                     produced_by="chunker.py::split_documents",
